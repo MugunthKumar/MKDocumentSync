@@ -16,6 +16,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    /*
     NSString *bundleDocPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Documents"];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsDirectory = [paths objectAtIndex:0];
@@ -41,6 +42,7 @@
         [[NSFileManager defaultManager] copyItemAtPath:filePath toPath:destinationPath error:&error];
         if(error) DLog(@"%@", error);
     }
+    */
     
     return YES;
 }

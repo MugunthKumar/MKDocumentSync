@@ -14,9 +14,11 @@
 @interface MKDocumentSync (/*Private Methods*/)
 -(void) pullFromiCloud;
 -(void) pushToiCloud;
+@property (strong, nonatomic) NSMetadataQuery *query;
 @end
 
 @implementation MKDocumentSync
+@synthesize query = query_;
 
 #pragma mark -
 #pragma mark Singleton Methods
@@ -73,9 +75,9 @@
 
         if(iCloudFirstContainer) {  // is iCloud enabled
             
+            [self pullFromiCloud];
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-                [self pullFromiCloud];
-                [self pushToiCloud];
+                //[self pushToiCloud];
             });
             
         } else {
@@ -92,8 +94,38 @@
 
 // Add your custom methods here
 
+- (void)queryDidFinishGathering:(NSNotification *)notification {
+    
+    NSMetadataQuery *query = [notification object];
+    [query disableUpdates];
+    [query stopQuery];
+    DLog(@"Query ended with %d results", [query resultCount]);
+    for(NSMetadataItem *item in query.results) {
+
+        NSURL *url = [item valueForAttribute:NSMetadataItemURLKey];
+        NSError *error = nil;
+        DLog(@"Downloading [%@] from iCloud", url);
+        [[NSFileManager defaultManager] startDownloadingUbiquitousItemAtURL:url error:&error];
+        if(error) DLog(@"%@", error);
+    }
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self 
+                                                    name:NSMetadataQueryDidFinishGatheringNotification 
+                                                  object:self.query];
+    self.query = nil; // we're done with it
+}
+
 -(void) pullFromiCloud {
     
+    self.query = [[NSMetadataQuery alloc] init];
+    [self.query setSearchScopes:[NSArray arrayWithObjects:NSMetadataQueryUbiquitousDocumentsScope, NSMetadataQueryUbiquitousDataScope, nil]];
+
+    [self.query setPredicate:[NSPredicate predicateWithFormat:[NSString stringWithFormat:@"%K like '*'", NSMetadataItemFSNameKey]]];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(queryDidFinishGathering:) name:NSMetadataQueryDidFinishGatheringNotification object:self.query];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.query startQuery];
+    });
 }
 
 -(void) pushToiCloud {
@@ -108,7 +140,7 @@
         NSString *relativePath = [filePath stringByReplacingOccurrencesOfString:docsDirectory withString:@""];
         relativePath = [relativePath stringByReplacingOccurrencesOfString:@"/" withString:@""];
         NSURL *iCloudFirstContainer = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
-        NSURL *iCloudDestinationURL = [iCloudFirstContainer URLByAppendingPathComponent:relativePath];
+        NSURL *iCloudDestinationURL = [[iCloudFirstContainer URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:relativePath];
 
         NSError *error = nil;
         [[NSFileManager defaultManager] setUbiquitous:YES 
