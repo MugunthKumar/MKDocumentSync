@@ -17,6 +17,7 @@
 		AB761E3214E00ACC005EBD02 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB761E3114E00ACC005EBD02 /* MasterViewController.m */; };
 		AB761E3F14E00BEE005EBD02 /* MKDocumentSync.m in Sources */ = {isa = PBXBuildFile; fileRef = AB761E3E14E00BEE005EBD02 /* MKDocumentSync.m */; };
 		AB761E4214E00C15005EBD02 /* MKDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = AB761E4114E00C15005EBD02 /* MKDocument.m */; };
+		ABDE3F1614E61DF100C51D96 /* Documents in Resources */ = {isa = PBXBuildFile; fileRef = ABDE3F1514E61DF100C51D96 /* Documents */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		AB761E3E14E00BEE005EBD02 /* MKDocumentSync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKDocumentSync.m; sourceTree = "<group>"; };
 		AB761E4014E00C15005EBD02 /* MKDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKDocument.h; sourceTree = "<group>"; };
 		AB761E4114E00C15005EBD02 /* MKDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKDocument.m; sourceTree = "<group>"; };
+		ABDE3F1514E61DF100C51D96 /* Documents */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Documents; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 		AB761E0C14E00ACC005EBD02 = {
 			isa = PBXGroup;
 			children = (
+				ABDE3F1514E61DF100C51D96 /* Documents */,
 				AB761E3C14E00BC2005EBD02 /* MKDocumentSyncLib */,
 				AB761E2114E00ACC005EBD02 /* MKDocumentSync */,
 				AB761E1A14E00ACC005EBD02 /* Frameworks */,
@@ -171,6 +174,7 @@
 			files = (
 				AB761E2614E00ACC005EBD02 /* InfoPlist.strings in Resources */,
 				AB761E2F14E00ACC005EBD02 /* MainStoryboard.storyboard in Resources */,
+				ABDE3F1614E61DF100C51D96 /* Documents in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

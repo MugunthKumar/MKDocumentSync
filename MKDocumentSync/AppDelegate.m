@@ -16,6 +16,32 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    NSString *bundleDocPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Documents"];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsDirectory = [paths objectAtIndex:0];
+
+    NSArray *files = [[MKDocumentSync sharedInstance] filesInDirectory:bundleDocPath];
+    for(NSString *filePath in files) {
+        
+        NSError *error = nil;
+        NSString *relativePath = [filePath stringByReplacingOccurrencesOfString:bundleDocPath withString:@""];
+        NSString *destinationPath = [docsDirectory stringByAppendingString:relativePath];
+        NSString *directoryPath = [destinationPath stringByDeletingLastPathComponent];
+        BOOL isDir = NO;
+        BOOL exists = [[NSFileManager defaultManager] fileExistsAtPath:directoryPath isDirectory:&isDir];
+        
+        if(!(exists && isDir)) {
+            
+            [[NSFileManager defaultManager] createDirectoryAtPath:directoryPath withIntermediateDirectories:YES attributes:nil error:&error];
+            if(error) DLog(@"%@", error);
+            
+            error = nil;
+        }
+        
+        [[NSFileManager defaultManager] copyItemAtPath:filePath toPath:destinationPath error:&error];
+        if(error) DLog(@"%@", error);
+    }
+    
     return YES;
 }
 							

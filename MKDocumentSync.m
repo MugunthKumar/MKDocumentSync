@@ -9,6 +9,7 @@
 //  Permission granted to do anything, commercial/non-commercial with this file apart from removing the line/URL above
 
 #import "MKDocumentSync.h"
+#import "MKDocument.h"
 
 @interface MKDocumentSync (/*Private Methods*/)
 -(void) pullFromiCloud;
@@ -72,8 +73,10 @@
 
         if(iCloudFirstContainer) {  // is iCloud enabled
             
-            [self pullFromiCloud];
-            [self pushToiCloud];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                [self pullFromiCloud];
+                [self pushToiCloud];
+            });
             
         } else {
             DLog(@"iCloud Document Sync not enabled");   
@@ -98,7 +101,25 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsDirectory = [paths objectAtIndex:0];    
 
-    [self filesInDirectory:docsDirectory];
+    NSArray *listOfFiles = [self filesInDirectory:docsDirectory];
+    for(NSString *filePath in listOfFiles) {
+            
+        MKDocument *thisDocument = [[MKDocument alloc] initWithFileURL:[NSURL fileURLWithPath:filePath]];
+        NSString *relativePath = [filePath stringByReplacingOccurrencesOfString:docsDirectory withString:@""];
+        
+        NSURL *iCloudFirstContainer = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
+        NSString *iCloudDestinationURLString = [[iCloudFirstContainer absoluteString] stringByAppendingString:relativePath];
+
+        NSError *error = nil;
+        [[NSFileManager defaultManager] setUbiquitous:YES 
+                                            itemAtURL:thisDocument.fileURL 
+                                       destinationURL:[NSURL URLWithString:iCloudDestinationURLString] 
+                                                error:&error];
+        
+        if(error) DLog(@"%@", error);
+        
+        DLog(@"Moving [%@] to iCloud location at [%@]", [thisDocument.fileURL absoluteString], iCloudDestinationURLString);
+    }
 }
 
 -(NSMutableArray*) filesInDirectory: (NSString*) directoryName
