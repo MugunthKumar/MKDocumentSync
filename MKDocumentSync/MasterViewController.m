@@ -7,6 +7,7 @@
 //
 
 #import "MasterViewController.h"
+#import "MKDocumentSync.h"
 
 @implementation MasterViewController
 
@@ -28,6 +29,15 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Sync", @"") style:UIBarButtonItemStylePlain
+																			 target:self action:@selector(syncTapped:)];
+    
+
+}
+
+-(void) syncTapped:(id) sender {
+    
+    [[MKDocumentSync sharedInstance] startSync];
 }
 
 - (void)viewDidUnload
