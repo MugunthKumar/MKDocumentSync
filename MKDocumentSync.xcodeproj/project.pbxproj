@@ -16,6 +16,8 @@
 		AB761E2F14E00ACC005EBD02 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB761E2D14E00ACC005EBD02 /* MainStoryboard.storyboard */; };
 		AB761E3214E00ACC005EBD02 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB761E3114E00ACC005EBD02 /* MasterViewController.m */; };
 		AB761E3514E00ACC005EBD02 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB761E3414E00ACC005EBD02 /* DetailViewController.m */; };
+		AB761E3F14E00BEE005EBD02 /* MKDocumentSync.m in Sources */ = {isa = PBXBuildFile; fileRef = AB761E3E14E00BEE005EBD02 /* MKDocumentSync.m */; };
+		AB761E4214E00C15005EBD02 /* MKDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = AB761E4114E00C15005EBD02 /* MKDocument.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,17 +25,22 @@
 		AB761E1B14E00ACC005EBD02 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AB761E1D14E00ACC005EBD02 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AB761E1F14E00ACC005EBD02 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		AB761E2314E00ACC005EBD02 /* MKDocumentSync-Info.plist */ = {isa = PBXFileReference; path = "MKDocumentSync-Info.plist"; sourceTree = "<group>"; };
+		AB761E2314E00ACC005EBD02 /* MKDocumentSync-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MKDocumentSync-Info.plist"; sourceTree = "<group>"; };
 		AB761E2514E00ACC005EBD02 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AB761E2714E00ACC005EBD02 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		AB761E2914E00ACC005EBD02 /* MKDocumentSync-Prefix.pch */ = {isa = PBXFileReference; path = "MKDocumentSync-Prefix.pch"; sourceTree = "<group>"; };
-		AB761E2A14E00ACC005EBD02 /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		AB761E2914E00ACC005EBD02 /* MKDocumentSync-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MKDocumentSync-Prefix.pch"; sourceTree = "<group>"; };
+		AB761E2A14E00ACC005EBD02 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AB761E2B14E00ACC005EBD02 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		AB761E2E14E00ACC005EBD02 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		AB761E3014E00ACC005EBD02 /* MasterViewController.h */ = {isa = PBXFileReference; path = MasterViewController.h; sourceTree = "<group>"; };
+		AB761E3014E00ACC005EBD02 /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		AB761E3114E00ACC005EBD02 /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
-		AB761E3314E00ACC005EBD02 /* DetailViewController.h */ = {isa = PBXFileReference; path = DetailViewController.h; sourceTree = "<group>"; };
+		AB761E3314E00ACC005EBD02 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		AB761E3414E00ACC005EBD02 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		AB761E3B14E00ADD005EBD02 /* MKDocumentSync.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MKDocumentSync.entitlements; sourceTree = "<group>"; };
+		AB761E3D14E00BEE005EBD02 /* MKDocumentSync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKDocumentSync.h; sourceTree = "<group>"; };
+		AB761E3E14E00BEE005EBD02 /* MKDocumentSync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKDocumentSync.m; sourceTree = "<group>"; };
+		AB761E4014E00C15005EBD02 /* MKDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKDocument.h; sourceTree = "<group>"; };
+		AB761E4114E00C15005EBD02 /* MKDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKDocument.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +60,7 @@
 		AB761E0C14E00ACC005EBD02 = {
 			isa = PBXGroup;
 			children = (
+				AB761E3C14E00BC2005EBD02 /* MKDocumentSyncLib */,
 				AB761E2114E00ACC005EBD02 /* MKDocumentSync */,
 				AB761E1A14E00ACC005EBD02 /* Frameworks */,
 				AB761E1814E00ACC005EBD02 /* Products */,
@@ -80,6 +88,7 @@
 		AB761E2114E00ACC005EBD02 /* MKDocumentSync */ = {
 			isa = PBXGroup;
 			children = (
+				AB761E3B14E00ADD005EBD02 /* MKDocumentSync.entitlements */,
 				AB761E2A14E00ACC005EBD02 /* AppDelegate.h */,
 				AB761E2B14E00ACC005EBD02 /* AppDelegate.m */,
 				AB761E2D14E00ACC005EBD02 /* MainStoryboard.storyboard */,
@@ -101,6 +110,17 @@
 				AB761E2914E00ACC005EBD02 /* MKDocumentSync-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AB761E3C14E00BC2005EBD02 /* MKDocumentSyncLib */ = {
+			isa = PBXGroup;
+			children = (
+				AB761E3D14E00BEE005EBD02 /* MKDocumentSync.h */,
+				AB761E3E14E00BEE005EBD02 /* MKDocumentSync.m */,
+				AB761E4014E00C15005EBD02 /* MKDocument.h */,
+				AB761E4114E00C15005EBD02 /* MKDocument.m */,
+			);
+			name = MKDocumentSyncLib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -170,6 +190,8 @@
 				AB761E2C14E00ACC005EBD02 /* AppDelegate.m in Sources */,
 				AB761E3214E00ACC005EBD02 /* MasterViewController.m in Sources */,
 				AB761E3514E00ACC005EBD02 /* DetailViewController.m in Sources */,
+				AB761E3F14E00BEE005EBD02 /* MKDocumentSync.m in Sources */,
+				AB761E4214E00C15005EBD02 /* MKDocument.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +265,7 @@
 		AB761E3914E00ACC005EBD02 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = MKDocumentSync/MKDocumentSync.entitlements;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MKDocumentSync/MKDocumentSync-Prefix.pch";
 				INFOPLIST_FILE = "MKDocumentSync/MKDocumentSync-Info.plist";
@@ -254,6 +277,7 @@
 		AB761E3A14E00ACC005EBD02 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = MKDocumentSync/MKDocumentSync.entitlements;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MKDocumentSync/MKDocumentSync-Prefix.pch";
 				INFOPLIST_FILE = "MKDocumentSync/MKDocumentSync-Info.plist";
