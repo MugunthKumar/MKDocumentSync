@@ -106,19 +106,19 @@
             
         MKDocument *thisDocument = [[MKDocument alloc] initWithFileURL:[NSURL fileURLWithPath:filePath]];
         NSString *relativePath = [filePath stringByReplacingOccurrencesOfString:docsDirectory withString:@""];
-        
+        relativePath = [relativePath stringByReplacingOccurrencesOfString:@"/" withString:@""];
         NSURL *iCloudFirstContainer = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
-        NSString *iCloudDestinationURLString = [[iCloudFirstContainer absoluteString] stringByAppendingString:relativePath];
+        NSURL *iCloudDestinationURL = [iCloudFirstContainer URLByAppendingPathComponent:relativePath];
 
         NSError *error = nil;
         [[NSFileManager defaultManager] setUbiquitous:YES 
                                             itemAtURL:thisDocument.fileURL 
-                                       destinationURL:[NSURL URLWithString:iCloudDestinationURLString] 
+                                       destinationURL:iCloudDestinationURL 
                                                 error:&error];
         
         if(error) DLog(@"%@", error);
         
-        DLog(@"Moving [%@] to iCloud location at [%@]", [thisDocument.fileURL absoluteString], iCloudDestinationURLString);
+        DLog(@"Moving [%@] to iCloud location at [%@]", thisDocument.fileURL, iCloudDestinationURL);
     }
 }
 
