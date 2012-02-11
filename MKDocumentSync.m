@@ -9,7 +9,6 @@
 //  Permission granted to do anything, commercial/non-commercial with this file apart from removing the line/URL above
 
 #import "MKDocumentSync.h"
-#import "MKDocument.h"
 
 @interface MKDocumentSync (/*Private Methods*/)
 -(void) pullFromiCloud;
@@ -96,12 +95,7 @@
 
 - (void)queryDidFinishGathering:(NSNotification *)notification {
     
-    NSMetadataQuery *query = [notification object];
-    [query disableUpdates];
-    DLog(@"Query ended with %d results", [query resultCount]);
-    NSArray *results = [[NSArray alloc] initWithArray:[query results]];
-
-    for(NSMetadataItem *item in results) {
+    for(NSMetadataItem *item in self.metadataQuery.results) {
 
         NSURL *url = [item valueForAttribute:NSMetadataItemURLKey];
         NSError *error = nil;
@@ -110,7 +104,8 @@
         if(error) DLog(@"%@", error);
     }
     
-    [query stopQuery];
+    [self.metadataQuery disableUpdates];
+    [self.metadataQuery stopQuery];
     [[NSNotificationCenter defaultCenter] removeObserver:self 
                                                     name:NSMetadataQueryDidFinishGatheringNotification 
                                                   object:self.metadataQuery];
@@ -141,7 +136,7 @@
     NSArray *listOfFiles = [self filesInDirectory:docsDirectory];
     for(NSString *filePath in listOfFiles) {
             
-        MKDocument *thisDocument = [[MKDocument alloc] initWithFileURL:[NSURL fileURLWithPath:filePath]];
+        NSURL *fileURL = [NSURL fileURLWithPath:filePath];
         NSString *relativePath = [filePath stringByReplacingOccurrencesOfString:docsDirectory withString:@""];
         relativePath = [relativePath substringFromIndex:1];
         
@@ -156,13 +151,13 @@
         
         error = nil;
         [[NSFileManager defaultManager] setUbiquitous:YES 
-                                            itemAtURL:thisDocument.fileURL 
+                                            itemAtURL:fileURL
                                        destinationURL:iCloudDestinationURL 
                                                 error:&error];
         
         if(error) DLog(@"%@", error);
         
-        DLog(@"Moving [%@] to iCloud location at [%@]", thisDocument.fileURL, iCloudDestinationURL);
+        DLog(@"Moving [%@] to iCloud location at [%@]", fileURL, iCloudDestinationURL);
     }
 }
 

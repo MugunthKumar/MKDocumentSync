@@ -16,7 +16,6 @@
 		AB761E2F14E00ACC005EBD02 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB761E2D14E00ACC005EBD02 /* MainStoryboard.storyboard */; };
 		AB761E3214E00ACC005EBD02 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB761E3114E00ACC005EBD02 /* MasterViewController.m */; };
 		AB761E3F14E00BEE005EBD02 /* MKDocumentSync.m in Sources */ = {isa = PBXBuildFile; fileRef = AB761E3E14E00BEE005EBD02 /* MKDocumentSync.m */; };
-		AB761E4214E00C15005EBD02 /* MKDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = AB761E4114E00C15005EBD02 /* MKDocument.m */; };
 		ABDE3F1614E61DF100C51D96 /* Documents in Resources */ = {isa = PBXBuildFile; fileRef = ABDE3F1514E61DF100C51D96 /* Documents */; };
 /* End PBXBuildFile section */
 
@@ -37,8 +36,6 @@
 		AB761E3B14E00ADD005EBD02 /* MKDocumentSync.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MKDocumentSync.entitlements; sourceTree = "<group>"; };
 		AB761E3D14E00BEE005EBD02 /* MKDocumentSync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKDocumentSync.h; sourceTree = "<group>"; };
 		AB761E3E14E00BEE005EBD02 /* MKDocumentSync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKDocumentSync.m; sourceTree = "<group>"; };
-		AB761E4014E00C15005EBD02 /* MKDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKDocument.h; sourceTree = "<group>"; };
-		AB761E4114E00C15005EBD02 /* MKDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKDocument.m; sourceTree = "<group>"; };
 		ABDE3F1514E61DF100C51D96 /* Documents */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Documents; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,8 +112,6 @@
 			children = (
 				AB761E3D14E00BEE005EBD02 /* MKDocumentSync.h */,
 				AB761E3E14E00BEE005EBD02 /* MKDocumentSync.m */,
-				AB761E4014E00C15005EBD02 /* MKDocument.h */,
-				AB761E4114E00C15005EBD02 /* MKDocument.m */,
 			);
 			name = MKDocumentSyncLib;
 			sourceTree = "<group>";
@@ -189,7 +184,6 @@
 				AB761E2C14E00ACC005EBD02 /* AppDelegate.m in Sources */,
 				AB761E3214E00ACC005EBD02 /* MasterViewController.m in Sources */,
 				AB761E3F14E00BEE005EBD02 /* MKDocumentSync.m in Sources */,
-				AB761E4214E00C15005EBD02 /* MKDocument.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
