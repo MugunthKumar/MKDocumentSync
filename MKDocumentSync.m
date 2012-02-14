@@ -13,6 +13,7 @@
 @interface MKDocumentSync (/*Private Methods*/)
 -(void) pullFromiCloud;
 -(void) pushToiCloud;
+-(NSString*) documentsDirectory;
 @property (strong, nonatomic) NSMetadataQuery *metadataQuery;
 @end
 
@@ -111,12 +112,12 @@
                 // If the item is in iCloud, see if it is downloaded.
                 if ([url getResourceValue:&isDownloaded forKey:NSURLUbiquitousItemIsDownloadedKey error:&error]) {
                     
-                    if(error) DLog(@"%@", error);
+                    if(error) DLog(@"Cannot check iCloud sync status of file [%@]", error);
                     if (![isDownloaded boolValue]) {
                     
                         error = nil;
                         [[NSFileManager defaultManager] startDownloadingUbiquitousItemAtURL:url error:&error];
-                        if(error) DLog(@"%@", error);
+                        if(error) DLog(@"Cannot start downloading from iCloud [%@]", error);
                     }
                 }
                 
@@ -125,7 +126,17 @@
                 if ([url getResourceValue:&isConflicted forKey:NSURLUbiquitousItemHasUnresolvedConflictsKey error:&error]) {
                     
                     if ([isConflicted boolValue]) {
-                        DLog(@"%@ is in conflict", url);
+                        
+                        DLog(@"%@ is in conflict. Removing from iCloud", url);
+                        NSString *fileName = [url lastPathComponent];
+                        NSString *documentsDirectoryPath = [[self documentsDirectory] stringByAppendingPathComponent:fileName];
+                        [[NSFileManager defaultManager] moveItemAtURL:url toURL:[NSURL fileURLWithPath:documentsDirectoryPath] 
+                                                                error:&error];
+                        if(error) DLog(@"Moving conflicted file failed: [%@]", error);
+
+                        error = nil;
+                        [[NSFileManager defaultManager] evictUbiquitousItemAtURL:url error:&error];
+                        if(error) DLog(@"Evicting conflicted file failed: [%@]", error);
                     }
                 }
             }
@@ -158,9 +169,7 @@
 
 -(void) pushToiCloud {
 
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *docsDirectory = [paths objectAtIndex:0];    
-
+    NSString *docsDirectory = [self documentsDirectory];
     NSArray *listOfFiles = [self filesInDirectory:docsDirectory];
     for(NSString *filePath in listOfFiles) {
             
@@ -175,7 +184,7 @@
         
         NSError *error = nil;
         [[NSFileManager defaultManager] createDirectoryAtURL:directoryURL withIntermediateDirectories:YES attributes:nil error:&error];        
-        if(error) DLog(@"%@", error);
+        if(error) DLog(@"Unable to create iCloud local directory [%@]", error);
         
         error = nil;
         [[NSFileManager defaultManager] setUbiquitous:YES 
@@ -187,6 +196,14 @@
         
         DLog(@"Moving [%@] to iCloud location at [%@]", fileURL, iCloudDestinationURL);
     }
+}
+
+-(NSString*) documentsDirectory {
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsDirectory = [paths objectAtIndex:0];    
+    
+    return docsDirectory;
 }
 
 -(NSString*) iCloudLocalDocumentDirectory {
