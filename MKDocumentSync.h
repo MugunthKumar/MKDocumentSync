@@ -44,6 +44,8 @@
 
 @interface MKDocumentSync : NSObject
 + (MKDocumentSync*) sharedInstance;
--(NSMutableArray*) filesInDirectory: (NSString*) directoryName;
 -(void) startSync;
+-(NSMutableArray*) filesInDirectory: (NSString*) directoryName;
+-(NSString*) iCloudLocalDocumentDirectory;
+-(NSMutableArray*) filesIniCloudDirectory;
 @end

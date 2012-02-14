@@ -100,8 +100,36 @@
         NSURL *url = [item valueForAttribute:NSMetadataItemURLKey];
         NSError *error = nil;
         DLog(@"Downloading [%@] from iCloud", url);
-        [[NSFileManager defaultManager] startDownloadingUbiquitousItemAtURL:url error:&error];
-        if(error) DLog(@"%@", error);
+        
+        NSNumber *isIniCloud = nil;
+        if ([url getResourceValue:&isIniCloud forKey:NSURLIsUbiquitousItemKey error:nil]) {
+
+            // If the item is in iCloud, see if it is downloaded.
+            if ([isIniCloud boolValue]) {
+                NSNumber*  isDownloaded = nil;
+                error = nil;
+                // If the item is in iCloud, see if it is downloaded.
+                if ([url getResourceValue:&isDownloaded forKey:NSURLUbiquitousItemIsDownloadedKey error:&error]) {
+                    
+                    if(error) DLog(@"%@", error);
+                    if (![isDownloaded boolValue]) {
+                    
+                        error = nil;
+                        [[NSFileManager defaultManager] startDownloadingUbiquitousItemAtURL:url error:&error];
+                        if(error) DLog(@"%@", error);
+                    }
+                }
+                
+                error = nil;
+                NSNumber*  isConflicted = nil;
+                if ([url getResourceValue:&isConflicted forKey:NSURLUbiquitousItemHasUnresolvedConflictsKey error:&error]) {
+                    
+                    if ([isConflicted boolValue]) {
+                        DLog(@"%@ is in conflict", url);
+                    }
+                }
+            }
+        }
     }
     
     [self.metadataQuery disableUpdates];
@@ -159,6 +187,18 @@
         
         DLog(@"Moving [%@] to iCloud location at [%@]", fileURL, iCloudDestinationURL);
     }
+}
+
+-(NSString*) iCloudLocalDocumentDirectory {
+    
+    NSURL *iCloudFirstContainer = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
+    NSURL *iCloudDocsURL = [iCloudFirstContainer URLByAppendingPathComponent:@"Documents"];    
+    return [iCloudDocsURL path];
+}
+
+-(NSMutableArray*) filesIniCloudDirectory {
+    
+    return [self filesInDirectory:[self iCloudLocalDocumentDirectory]];
 }
 
 -(NSMutableArray*) filesInDirectory: (NSString*) directoryName
