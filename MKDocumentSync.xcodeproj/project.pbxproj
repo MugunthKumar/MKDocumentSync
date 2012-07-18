@@ -16,7 +16,6 @@
 		AB761E2F14E00ACC005EBD02 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB761E2D14E00ACC005EBD02 /* MainStoryboard.storyboard */; };
 		AB761E3214E00ACC005EBD02 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB761E3114E00ACC005EBD02 /* MasterViewController.m */; };
 		AB761E3F14E00BEE005EBD02 /* MKDocumentSync.m in Sources */ = {isa = PBXBuildFile; fileRef = AB761E3E14E00BEE005EBD02 /* MKDocumentSync.m */; };
-		ABDE3F1614E61DF100C51D96 /* Documents in Resources */ = {isa = PBXBuildFile; fileRef = ABDE3F1514E61DF100C51D96 /* Documents */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,7 +35,6 @@
 		AB761E3B14E00ADD005EBD02 /* MKDocumentSync.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MKDocumentSync.entitlements; sourceTree = "<group>"; };
 		AB761E3D14E00BEE005EBD02 /* MKDocumentSync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKDocumentSync.h; sourceTree = "<group>"; };
 		AB761E3E14E00BEE005EBD02 /* MKDocumentSync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKDocumentSync.m; sourceTree = "<group>"; };
-		ABDE3F1514E61DF100C51D96 /* Documents */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Documents; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +54,6 @@
 		AB761E0C14E00ACC005EBD02 = {
 			isa = PBXGroup;
 			children = (
-				ABDE3F1514E61DF100C51D96 /* Documents */,
 				AB761E3C14E00BC2005EBD02 /* MKDocumentSyncLib */,
 				AB761E2114E00ACC005EBD02 /* MKDocumentSync */,
 				AB761E1A14E00ACC005EBD02 /* Frameworks */,
@@ -169,7 +166,6 @@
 			files = (
 				AB761E2614E00ACC005EBD02 /* InfoPlist.strings in Resources */,
 				AB761E2F14E00ACC005EBD02 /* MainStoryboard.storyboard in Resources */,
-				ABDE3F1614E61DF100C51D96 /* Documents in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,6 +253,7 @@
 		AB761E3914E00ACC005EBD02 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_OBJCPP_ARC_ABI = NO;
 				CODE_SIGN_ENTITLEMENTS = MKDocumentSync/MKDocumentSync.entitlements;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MKDocumentSync/MKDocumentSync-Prefix.pch";
@@ -269,6 +266,7 @@
 		AB761E3A14E00ACC005EBD02 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_OBJCPP_ARC_ABI = NO;
 				CODE_SIGN_ENTITLEMENTS = MKDocumentSync/MKDocumentSync.entitlements;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MKDocumentSync/MKDocumentSync-Prefix.pch";
